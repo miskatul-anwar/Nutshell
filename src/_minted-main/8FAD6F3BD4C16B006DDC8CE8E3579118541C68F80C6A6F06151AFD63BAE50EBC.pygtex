@@ -1,0 +1,16 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+
+\PYG{k+kn}{import} \PYG{n+nn}{matplotlib.pyplot} \PYG{k}{as} \PYG{n+nn}{plt}
+\PYG{k+kn}{import} \PYG{n+nn}{numpy} \PYG{k}{as} \PYG{n+nn}{np}
+
+\PYG{n}{ax} \PYG{o}{=} \PYG{n}{plt}\PYG{o}{.}\PYG{n}{axes}\PYG{p}{(}\PYG{n}{projection}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}3d\PYGZdq{}}\PYG{p}{)}
+
+\PYG{n}{x\PYGZus{}data} \PYG{o}{=} \PYG{n}{np}\PYG{o}{.}\PYG{n}{arange}\PYG{p}{(}\PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{10}\PYG{p}{,} \PYG{l+m+mf}{0.1}\PYG{p}{)}
+\PYG{n}{y\PYGZus{}data} \PYG{o}{=} \PYG{n}{np}\PYG{o}{.}\PYG{n}{arange}\PYG{p}{(}\PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{10}\PYG{p}{,} \PYG{l+m+mf}{0.1}\PYG{p}{)}
+\PYG{n}{z\PYGZus{}data} \PYG{o}{=} \PYG{n}{x\PYGZus{}data} \PYG{o}{*} \PYG{n}{y\PYGZus{}data}
+
+\PYG{c+c1}{\PYGZsh{} ax.scatter(x\PYGZus{}data, y\PYGZus{}data, z\PYGZus{}data, alpha=0.5, color=\PYGZdq{}black\PYGZdq{})}
+\PYG{n}{ax}\PYG{o}{.}\PYG{n}{plot}\PYG{p}{(}\PYG{n}{x\PYGZus{}data}\PYG{p}{,} \PYG{n}{y\PYGZus{}data}\PYG{p}{,} \PYG{n}{z\PYGZus{}data}\PYG{p}{)}
+
+\PYG{n}{plt}\PYG{o}{.}\PYG{n}{show}\PYG{p}{()}
+\end{Verbatim}

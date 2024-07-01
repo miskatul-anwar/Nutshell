@@ -1,11 +1,57 @@
 \documentclass{book}
 
 % Packages to use
+\usepackage{amsmath}
+\usepackage{background}
+\usepackage{tikz}
+\usepackage{fancyhdr}
 \usepackage{tabularx}
 \usepackage{graphicx}
+\usepackage{geometry}
 \usepackage{hyperref}
 \usepackage{fontspec}
+\usepackage{xcolor}
 \usepackage{minted}
+
+% Define colors
+\definecolor{linkcolor}{RGB}{0,0,255}  % Blue color
+\definecolor{citecolor}{RGB}{0,128,0}  % Green color
+\definecolor{urlcolor}{RGB}{255,0,0}   % Red color
+
+% Setup hyperlink colors
+\hypersetup{
+    colorlinks=true,
+    linkcolor=linkcolor,
+    citecolor=citecolor,
+    urlcolor=urlcolor,
+    linktoc=all
+}
+
+% setup geometry
+\geometry{
+  a4paper,
+  left=2cm,
+  right=2cm,
+  top=2.5cm,
+  bottom=2.5cm
+}
+
+% Set up background image
+\backgroundsetup{
+  scale=1,
+  color=black,
+  opacity=1,
+  angle=0,
+  position=current page.center,
+  vshift=0cm,
+  hshift=0cm,
+  contents={
+    \includegraphics[width=\paperwidth,height=\paperheight]{../jpgs/texture-min.jpg}
+  }
+}
+
+% Custom headers and footers
+\pagestyle{fancy}
 
 % Necessary Details 🤠
 \title{Computer Scientist in A Nutshell}
@@ -33,7 +79,6 @@
 	      \end{itemize}
 	\item Java
 	      \begin{itemize}
-		      \item Setup
 		      \item Setup
 		      \item Compile \& Run
 		      \item Basics
@@ -94,16 +139,320 @@
 
 Maths will be the foundation what you'll need the most in this journey!
 The most important topics are \dots
+\section{Permutations \& Combinations}
+\textbf{Problems Related to Counting}
+\begin{enumerate}
+	\item Consider the word "Permutation". In how many ways can you arrange the letters,\\
+	      \begin{itemize}
+		      \item \textbf{No, rule specified,}\\
+		            \[
+			            Answer: \space n_t=2
+		            \]
+		            \[
+			            \frac{11!}{2!}
+		            \]
+		      \item \textbf{If, The vowels stay together,\\}
+		            \[
+			            n_{total} = 7
+		            \]
+		            \[
+			            n_t=2\\
+		            \]
+		            \[
+			            The \space Answer:\space \frac{7!}{2!}\cdot 5!
+		            \]
+		      \item \textbf{If, The vowels don't stay together,\\}
+		            \[
+			            \frac{11!}{2!}-\frac{7!}{2!}\cdot 5!
+		            \]
+		      \item \textbf{If the vowels stay at their place,}\\
+		            \[
+			            \frac{6!}{2!}
+		            \]
+		      \item \textbf{If, The order (vowels) is same,}\\
+		            "euaio" if the order of the vowels. Let's consider them as a single word.
+		            \[
+			            \frac{11!}{2!5!}
+		            \]
+		      \item \textbf{If the relative order is the same,}\\
+		            \[
+			            \frac{6!}{2!}\cdot 5!
+		            \]
+	      \end{itemize}
+	\item How many numbers greater than 800 and less than 4000 can be made with the digits 0,1,2,4,5,7,8,9 ? (no number occuring more than once in the same number)\\
+	      \textit{ Sol. }
+	      firstly, let's consider the 801 - 999 range...(all the three digit numbers available in the limit)\\
+	      The first number will definitely be 8 or 9, so the possible ways to put the first number is 2. The other numbers will be put as follows.
+	      \[
+		      2 \cdot 7 \cdot 6
+	      \]
+	      secondly, consider the 1000 - 3999 range...(all the four digit numbers available in the limit)\\
+	      The first number can only be 1 or 2 as three  is not given. So, the rest will be declining in the previously shown manner.
+	      \[
+		      2 \cdot 7\cdot 6\cdot 5
+	      \]
+	      Now, calculation of the possible ways is as follows:
+	      \[
+		      2 \cdot 7 \cdot 6 + 2 \cdot 7\cdot 6\cdot 5 = 504
+	      \]
+	\item Your Home to DU there's 3 ways avalable to go. DU to BUET there's only 2 available ways. How many ways are there to visit BUET from your home?\\
+	      (Yeah, ugh\dots you have'nt got a chance to read in BUET)\\
+	      \textit{ Sol=> } There are 6 different ways to visit BUET from your home.
+	\item there are five people in a vehicle. But there is only three sits available. In how many ways we can pick 3 people to have their sits?\\
+	      \textit{ Sol.=> } The answer is:
+	      \[
+		      5 \cdot 4 \cdot 3 = 60
+	      \]
+	      If we apply the formulae,
+	      pick 3 people from 5 and arrange them.
+	      \[
+		      ^5P_3 = 60
+	      \]
+	\item How many even numbers of three digits can be formed from the digits 0,1,2,3,4,5,6 ?\\
+	      \textit{ Sol.1} If the last digit is 0, 2, 4 or 6 , then it can be an even number. Also, we need to keep in mind that
+	      the first number can't be zero.
+	      \[
+		      6 \cdot 5 \cdot 1 + 5 \cdot 5 \cdot 3 = 105
+	      \]
+	\item  The following problems have to do with cardinalities of sets
+	      of phone numbers of certain kinds.
+	      \begin{itemize}
+		      \item How many 7-digit phone numbers are possible, assuming
+		            that the first digit can’t be a 0 or a 1?\\
+		            \textit{ Sol. }\\
+		            To determine the number of possible 7-digit phone numbers where the first digit cannot be 0 or 1, we can break the problem into parts:\\
+		            \begin{itemize}
+			            \item First Digit: The first digit has 8 possible choices (2 through 9).
+			            \item Remaining Digits: Each of the remaining 6 digits can be any digit from 0 to 9, giving each position 10 possible choices.
+		            \end{itemize}
 
+		            Therefore, the total number of 7-digit phone numbers can be calculated as follows:\\
+		            \[
+			            8 \cdot 10^6
+		            \]
+
+		            Here's the step-by-step calculation:\\
+		            There are 8 choices for the first digit.
+		            There are 10 choices for each of the remaining 6 digits.
+		            So, multiplying these together:
+		            \[
+			            8\cdot10^6=8,000,000
+		            \]
+
+		            Thus, there are 8,000,000 possible 7-digit phone numbers under the given constraints.
+		      \item  Solve the above problem again, except now assume also that
+		            the phone number is not allowed to start with 911 (since
+		            this is reserved for emergency use, and it would not be
+		            desirable for the system to wait to see whether more digits
+		            were going to be dialed after someone has dialed 911).
+		            \textit{ Sol. }\\
+		            To solve this problem under the new constraints, we need to calculate the total number of valid 7-digit phone numbers that do not start with 911.\\
+		            \textbf{Steps:}
+		            \begin{enumerate}
+			            \item Total number of 7-digit phone numbers without additional constraints:
+			                  As previously calculated, the total number of possible 7-digit phone numbers where the first digit can't be 0 or 1 is:
+			                  \[
+				                  8×10^6
+				                  =8,000,000
+			                  \]
+			            \item Calculate the number of invalid phone numbers that start with 911:
+			                  \begin{itemize}
+				                  \item If the phone number starts with 911, the first three digits are fixed as 911.
+				                  \item The remaining 4 digits can each be any digit from 0 to 9, so there are
+				                        10 choices for each of the remaining 4 digits.
+			                  \end{itemize}
+			                  Therefore, the number of phone numbers that start with 911 is:
+			                  \[
+				                  10
+				                  ×
+				                  10
+				                  ×
+				                  10
+				                  ×
+				                  10
+				                  =
+				                  1
+				                  0
+				                  ^4
+				                  =
+				                  10
+				                  ,
+				                  000
+			                  \]
+
+		            \end{enumerate}
+		      \item Subtract the number of invalid phone numbers from the total:\\
+
+		            Total valid phone numbers = Total possible phone numbers - Invalid phone numbers.\\
+		            \[
+			            8,000,000−10,000=7,990,000
+		            \]
+	      \end{itemize}
+	      Thus, the total number of valid 7-digit phone numbers, ensuring the first digit can't be 0 or 1 and the number does not start with 911, is 7,990,000.
+	\item How many different functions f : A → B are possible in total
+	      with |A| = m and |B| = n? (m and n are, of course, positive
+	      integers.)\\
+	      \textit{ Sol.2}\\
+
+	      To determine how many different functions
+	      f:A→B are possible with
+	      ∣A∣=m and ∣B∣=n, we can consider the following:
+	      \begin{itemize}
+		      \item
+		            Definition of a Function: A function
+		            \[
+			            f:A\rightarrow B
+		            \] maps every element in set
+		            A to an element in set
+		            B.
+		      \item
+		            Total Number of Functions:
+
+		            For each element in set
+		            A, there are
+		            n possible choices in set
+		            B.
+		            Since there are
+		            m elements in set
+		            A, each of the
+		            m elements can independently be mapped to any of the
+		            n elements in
+		            B.
+
+	      \end{itemize}
+
+	      To find the total number of such functions, we use the principle of counting:
+	      \[
+		      n×n×n×⋯×n(m times)
+	      \]
+
+	      This can be written as:
+	      \[
+		      n^m
+	      \]
+	      Conclusion
+	      Thus, the total number of different functions
+	      f:A→B with
+	      ∣A∣=m and
+	      ∣B∣=n is
+	      \[
+		      n^m
+	      \]
+	\item
+	      \begin{itemize}
+		      \item  Consider the grid shown below. Starting at a point, you can
+		            go one step up or one step to the right at each move (as long
+		            as any such move keeps you within the grid). This procedure
+		            is continued until the point C is reached from point A.\\
+		            (a) How many different paths are there from A to C?\\
+		            (b) How many different paths from A to C pass through B?\\
+		            \begin{tikzpicture}
+			            % Grid lines
+			            \draw[step=1cm,gray,very thin] (0,0) grid (6,5);
+
+			            % Points A, B, C
+			            \filldraw[blue] (0,0) circle (3pt) node[anchor=north east] {A};
+			            \filldraw[blue] (3,3) circle (3pt) node[anchor=south east] {B};
+			            \filldraw[blue] (6,5) circle (3pt) node[anchor=south east] {C};
+
+			            % Labels for grid points
+			            \foreach \x in {1,...,6} {
+					            \foreach \y in {1,...,5} {
+							            \node at (\x-0.5,\y-0.5) {(\x,\y)};
+						            }
+				            }\end{tikzpicture}\\
+		            (We say that two paths are different whenever they are not
+		            identical.)\\
+
+		            Let's analyze the problem of finding different paths in a 5x6 grid from point A to point C, and specifically how many of those paths pass through point B(2,3).
+		            In a 5x6 grid:\\
+		            Starting from point A(1,1) to point C(5,6), you need to make 4 steps up and 5 steps to the right.
+		            The total number of paths from A to C can be calculated using the combination formula, since each path consists of 4 up movements (U) and 5 right movements (R):
+		            \[
+			            Total Paths = 9C4
+		            \]
+		            Calculating this:
+		            \[
+			            \frac{4×3×2×1}{9×8×7×6} =126
+		            \]
+		            So, there are 126 different paths from A to C in the grid.
+		      \item
+		            To find paths from A to C that pass through B(2,3):
+
+		            From A to B(2,3), you need 1 step up and 2 steps to the right.
+		            From B(2,3) to C(5,6), you need 3 steps up and 3 steps to the right.
+		            So, the paths from A to C passing through B(2,3) involve:\\
+
+		            1 step up from A to B,\\
+		            2 steps to the right from A to B,\\
+		            3 steps up from B to C, and\\
+		            3 steps to the right from B to C.\\
+		            This gives a total of:
+		            \[
+			            3C1 \cdot 5C2 = 30
+		            \]
+		            \begin{itemize}
+			            \item  There are 126 different paths from A to C.
+			            \item There are 30 different paths from A to C that pass through B(2,3).
+		            \end{itemize}
+	      \end{itemize}
+	\item As a part of the population in Silverland seeks to break free,
+	      higher ups of the mafia enterprise that controls Silverland has
+	      decided to quickly form a regional subcommittee with their
+	      operatives to teach them a lesson. The subcommittee is to
+	      consist of 3 hockeystick experts (H), 2 tech-savvy social media
+	      monitors (S), and 2 specializing in effective usage of machete
+	      (M). When a pool of 8 H, 3 S, and 6 M among their regular
+	      thugs in the territory are available, in how many different
+	      ways the subcommittee can be formed if
+	      \begin{itemize}
+		      \item \textbf{(a) 2 of the H refuse to serve together:}
+
+		            Total ways without restriction:
+		            \[ \binom{8}{3} \times \binom{3}{2} \times \binom{6}{2} \]
+
+		            Ways with 2 specific H serving together:
+		            \[ \binom{6}{1} \times \binom{3}{2} \times \binom{6}{2} \]
+
+		            Number of ways where the 2 H do not serve together:
+		            \[
+			            \binom{8}{3} \times \binom{3}{2} \times \binom{6}{2} - \left( \binom{6}{1} \times \binom{3}{2} \times \binom{6}{2} \right)
+		            \]
+		      \item \textbf{(b) 2 of the M refuse to serve together:}
+
+		            Total ways without restriction:
+		            \[ \binom{8}{3} \times \binom{3}{2} \times \binom{6}{2} \]
+
+		            Ways with 2 specific M serving together:
+		            \[ \binom{8}{3} \times \binom{3}{2} \times \binom{4}{2} \]
+
+		            Number of ways where the 2 M do not serve together:
+		            \[
+			            \binom{8}{3} \times \binom{3}{2} \times \binom{6}{2} - \left( \binom{8}{3} \times \binom{3}{2} \times \binom{4}{2} \right)
+		            \]
+		      \item \textbf{(c) 1 S and 1 M refuse to serve together:}
+
+		            Total ways without restriction:
+		            \[ \binom{8}{3} \times \binom{3}{2} \times \binom{6}{2} \]
+
+		            Ways with 1 specific S and 1 specific M serving together:
+		            \[ \binom{8}{3} \times \binom{2}{1} \times \binom{5}{1} \times \binom{5}{2} \]
+
+		            Number of ways where 1 S and 1 M do not serve together:
+		            \[
+			            \binom{8}{3} \times \binom{3}{2} \times \binom{6}{2} - \left( \binom{8}{3} \times \binom{2}{1} \times \binom{5}{1} \times \binom{5}{2} \right)
+		            \]
+	      \end{itemize}
+\end{enumerate}
 \section{Probability}
 
 \begin{equation}
 	P(H|E) = \frac{P(H) \cdot P(E|H)}{P(E)}
 \end{equation}
 
-P(H) = Probability  a  hypothesis  is  true\\
-P(H)=Probability  of   seeing  the  evidence  if   the  hypothesis  is  true\\
-P(E) = Probability   of   seeing   the   evidence\\
+P(H)   = Probability  a  hypothesis  is  true\\
+P(H)   = Probability  of   seeing  the  evidence  if   the  hypothesis  is  true\\
+P(E)   = Probability   of   seeing   the   evidence\\
 P(H|E) = Probability   a  hypothesis   is   true \\
 
 The "|" stands for 'given'
@@ -158,7 +507,7 @@ who can see or interact with these elements.
 	\item \textbf{default} (or no modifier): Accessible only within the same package.
 \end{itemize}
 Let's consider a simple example with a class `Car`:
-\begin{minted}[frame=single]{java}
+\begin{minted}[frame=single,linenos,breaklines]{java}
  public class Car {
     // public variable
     public String color = "red";
@@ -184,7 +533,7 @@ Let's consider a simple example with a class `Car`:
 		      \item  A utility class that provides common functionality.
 	      \end{itemize}
 \end{itemize}
-\begin{minted}[frame=single]{java}
+\begin{minted}[frame=single,linenos,breaklines]{java}
  public class MathUtils {
     public static int sum(int a, int b) {
         return a + b;
@@ -202,7 +551,7 @@ Let's consider a simple example with a class `Car`:
 \end{itemize}
 
 \begin{center}
-	\begin{tabular}{|c|c|c|c|c|c|}
+	\begin{tabular}{|p{2cm}|p{2cm}|p{2cm}|p{2cm}|p{2cm}|p{2cm}|}
 		\hline
 		\textbf{Access Modifiers} & \textbf{Same Class} & \textbf{Same Package Subclass} & \textbf{Same Package Non-subclass} & \textbf{Different Package Subclass} & \textbf{Different Package Non-subclass} \\
 		\hline
@@ -221,7 +570,7 @@ Let's consider a simple example with a class `Car`:
 \subsubsection{Simple Class}
 A basic Java class that encapsulates a private integer variable \texttt{x} and provides a public method \texttt{getValue()} to retrieve its value:
 
-\begin{minted}[frame=single]{java}
+\begin{minted}[frame=single,linenos,breaklines]{java}
 public class SimpleClass {
     private int x;
 
@@ -238,7 +587,7 @@ public class SimpleClass {
 \subsubsection{Bank Account}
 A Java class that encapsulates a bank account, with private fields for balance and account number, and public methods to deposit, withdraw, and get the balance:
 
-\begin{minted}[frame=single]{java}
+\begin{minted}[frame=single,linenos,breaklines]{java}
 public class BankAccount {
     private double balance;
     private int accountNumber;
@@ -269,7 +618,7 @@ public class BankAccount {
 \subsubsection{Student Record}
 A Java class that encapsulates a student's record, with private fields for name, age, and grades, and public methods to set and retrieve the information:
 
-\begin{minted}[frame=single]{java}
+\begin{minted}[frame=single,linenos,breaklines]{java}
 public class StudentRecord {
     private String name;
     private int age;
@@ -325,7 +674,7 @@ Data hiding is a principle of encapsulation that conceals the internal represent
 
 \begin{enumerate}
 	\item \textbf{Make Data Private}: Declare the data variables as private within the class:
-	      \begin{minted}[frame=single]{java}
+	      \begin{minted}[frame=single,linenos,breaklines]{java}
     public class Example {
         private int x;
         // ...
@@ -333,7 +682,7 @@ Data hiding is a principle of encapsulation that conceals the internal represent
     \end{minted}
 
 	\item \textbf{Use Getters and Setters}: Provide public methods (getters and setters) that allow controlled access to the data:
-	      \begin{minted}[frame=single]{java}
+	      \begin{minted}[frame=single,linenos,breaklines]{java}
     public class Example {
         private int x;
 
@@ -348,7 +697,7 @@ Data hiding is a principle of encapsulation that conceals the internal represent
     \end{minted}
 
 	\item \textbf{Avoid Direct Access}: Refrain from accessing the data directly from outside the class:
-	      \begin{minted}[frame=single]{java}
+	      \begin{minted}[frame=single,linenos,breaklines]{java}
     public class Example {
         private int x;
 
@@ -382,7 +731,7 @@ The `static` keyword in Java is used to declare static variables or methods that
 some key uses of the `static` keyword:
 \begin{enumerate}
 	\item  \textbf{Static Variables:} You can use `static` variables to store values that don't change throughout the program's execution.
-	      \begin{minted}[frame=single]{java}
+	      \begin{minted}[frame=single,linenos,breaklines]{java}
 
        public class MyMath {
     public static int MAX_VALUE = 100;
@@ -393,7 +742,7 @@ some key uses of the `static` keyword:
   }
     \end{minted}
 	\item  \textbf{Static Methods:} You can use `static` methods to perform operations that don't depend on instance-specific data.
-	      \begin{minted}[frame=single]{java}
+	      \begin{minted}[frame=single,linenos,breaklines]{java}
        
 public class MathUtil {
     public static double sqrt(double num) {
@@ -407,7 +756,7 @@ public class MathUtil {
     \end{minted}
 	\item\textbf{Singleton Pattern: }You can use `static` variables to implement the Singleton pattern, where only one instance of a class exists throughout
 	      the program's execution.
-	      \begin{minted}[frame=single]{java}
+	      \begin{minted}[frame=single,linenos,breaklines]{java}
            public class Logger {
     private static Logger instance = null;
 
@@ -426,7 +775,7 @@ public class MathUtil {
 	      of the class.
 
 	      Example:
-	      \begin{minted}[frame=single]{java}
+	      \begin{minted}[frame=single,linenos,breaklines]{java}
  public class StringHelper {
     public static boolean isEmpty(String str) {
         return str == null || str.trim().length() == 0;
@@ -446,7 +795,7 @@ public class MathUtil {
 
 \textbf{Copying Contents from \texttt{INPUT.DAT} to \texttt{OUTPUT.DAT}}
 
-\begin{minted}[frame=single]{java}
+\begin{minted}[frame=single,linenos,breaklines]{java}
 public class copyPaste {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new FileReader("input.dat"));
@@ -465,7 +814,7 @@ public class copyPaste {
 
 \textbf{Using \texttt{DataOutputStream} and \texttt{DataInputStream}}
 
-\begin{minted}[frame=single]{java}
+\begin{minted}[frame=single,linenos,breaklines]{java}
 import java.io.*;
 
 public class file1 {
@@ -490,7 +839,7 @@ public class file1 {
 
 \textbf{Reading from \texttt{output.txt}}
 
-\begin{minted}[frame=single]{java}
+\begin{minted}[frame=single,linenos,breaklines]{java}
 import java.io.*;
 
 public class file3 {
@@ -527,7 +876,7 @@ public class file3 {
 
 \textbf{01 (Method Overriding)}
 
-\begin{minted}[frame=single]{java}
+\begin{minted}[frame=single,linenos,breaklines]{java}
 // Parent class (Shape)
 class Shape {
     void draw() {
@@ -569,7 +918,7 @@ public class InheritanceExample1 {
 
 \textbf{02}
 
-\begin{minted}[frame=single]{java}
+\begin{minted}[frame=single,linenos,breaklines]{java}
 // Parent class (Vehicle)
 class Vehicle {
     void start() {
@@ -610,7 +959,7 @@ public class InheritanceExample2 {
 
 \subsubsection{Using \texttt{super} keyword in Inheritance}
 
-\begin{minted}[frame=single]{java}
+\begin{minted}[frame=single,linenos,breaklines]{java}
 class Animal {
     void sound() {
         System.out.println("The animal makes a sound");
@@ -636,7 +985,7 @@ public class SuperKeywordExample {
 
 \subsubsection{Using \texttt{this} keyword in Class}
 
-\begin{minted}[frame=single]{java}
+\begin{minted}[frame=single,linenos,breaklines]{java}
 class Complex {
     int a, b;
 
@@ -681,7 +1030,7 @@ public class ThisKeywordExample {
 \subsection{Constructors}
 
 \textbf{01}
-\begin{minted}[frame=single]{java}
+\begin{minted}[frame=single,linenos,breaklines]{java}
 class Innerconstructors {
     int a, b;
 
@@ -704,7 +1053,7 @@ public class ConstructorsExample {
 \end{minted}
 
 \textbf{02}
-\begin{minted}[frame=single]{java}
+\begin{minted}[frame=single,linenos,breaklines]{java}
 class Innerconstructors {
     int a, b;
 
@@ -727,7 +1076,7 @@ public class ConstructorsExample {
 \end{minted}
 
 \textbf{03}
-\begin{minted}[frame=single]{java}
+\begin{minted}[frame=single,linenos,breaklines]{java}
 class Innerconstructors {
     int a, b;
 
@@ -749,7 +1098,7 @@ public class ConstructorsExample {
 \end{minted}
 
 \textbf{04}
-\begin{minted}[frame=single]{java}
+\begin{minted}[frame=single,linenos,breaklines]{java}
 class Innerconstructors {
     int a, b;
 
@@ -773,7 +1122,7 @@ public class ConstructorsExample {
 
 \subsubsection{Method Overloading}
 
-\begin{minted}[frame=single]{java}
+\begin{minted}[frame=single,linenos,breaklines]{java}
 public class MethodOverloadingExample {
     void greetings() {
         System.out.println("Hello, Good Morning!");
@@ -791,7 +1140,7 @@ public class MethodOverloadingExample {
 
 \textbf{\texttt{iterateInMap.java}}
 
-\begin{minted}[frame=single]{java}
+\begin{minted}[frame=single,linenos,breaklines]{java}
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -828,7 +1177,7 @@ public class IterateInMap {
 
 \subsection{\texttt{StringBuilders.java}}
 
-\begin{minted}[frame=single]{java}
+\begin{minted}[frame=single,linenos,breaklines]{java}
 public class StringBuilders {
     public static void main(String[] args) {
         StringBuilder sb = new StringBuilder();
@@ -852,7 +1201,7 @@ public class StringBuilders {
 
 \subsubsection{\texttt{TreeMap} example}
 
-\begin{minted}[frame=single]{java}
+\begin{minted}[frame=single,linenos,breaklines]{java}
 import java.util.TreeMap;
 
 public class TreeMapExample {
@@ -886,7 +1235,7 @@ public class TreeMapExample {
 
 \subsubsection{\texttt{HashMap} example}
 
-\begin{minted}[frame=single]{java}
+\begin{minted}[frame=single,linenos,breaklines]{java}
 import java.util.HashMap;
 
 public class HashMapExample {
@@ -922,7 +1271,7 @@ public class HashMapExample {
 
 \textbf{\texttt{ArrayList} example}
 
-\begin{minted}[frame=single]{java}
+\begin{minted}[frame=single,linenos,breaklines]{java}
 import java.util.ArrayList;
 
 public class ArrayListExample {
@@ -948,7 +1297,7 @@ public class ArrayListExample {
 
 \textbf{\texttt{binarySearch1.java}}
 
-\begin{minted}[frame=single]{java}
+\begin{minted}[frame=single,linenos,breaklines]{java}
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -972,7 +1321,7 @@ public class BinarySearchExample {
 
 \textbf{\texttt{HashSet} example}
 
-\begin{minted}[frame=single]{java}
+\begin{minted}[frame=single,linenos,breaklines]{java}
 import java.util.HashSet;
 
 public class HashSetExample {
@@ -995,7 +1344,7 @@ public class HashSetExample {
 
 \textbf{\texttt{TreeSet} example}
 
-\begin{minted}[frame=single]{java}
+\begin{minted}[frame=single,linenos,breaklines]{java}
 import java.util.TreeSet;
 
 public class TreeSetExample {
@@ -1013,7 +1362,7 @@ public class TreeSetExample {
 
 \textbf{\texttt{LinkedHashSet} example}
 
-\begin{minted}[frame=single]{java}
+\begin{minted}[frame=single,linenos,breaklines]{java}
 import java.util.LinkedHashSet;
 import java.util.Iterator;
 
@@ -1035,7 +1384,7 @@ public class LinkedHashSetExample {
 
 \textbf{\texttt{Stack} example}
 
-\begin{minted}[frame=single]{java}
+\begin{minted}[frame=single,linenos,breaklines]{java}
 import java.util.Stack;
 
 public class StackExample {
@@ -1060,7 +1409,7 @@ public class StackExample {
 
 \textbf{\texttt{Queue} example}
 
-\begin{minted}[frame=single]{java}
+\begin{minted}[frame=single,linenos,breaklines]{java}
 import java.util.LinkedList;
 
 public class QueueExample {
@@ -1082,7 +1431,7 @@ public class QueueExample {
 
 \subsubsection{\texttt{Deque} example}
 
-\begin{minted}[frame=single]{java}
+\begin{minted}[frame=single,linenos,breaklines]{java}
 import java.util.ArrayDeque;
 
 public class DequeExample {
@@ -1111,7 +1460,7 @@ public class DequeExample {
 
 \subsubsection{\texttt{PriorityQueue} example}
 
-\begin{minted}[frame=single]{java}
+\begin{minted}[frame=single,linenos,breaklines]{java}
 import java.util.PriorityQueue;
 
 public class PriorityQueueExample {
@@ -1144,7 +1493,7 @@ Some important \textit{Python} libraries for 'Data Analysis'...
 \end{itemize}
 \section{Matplotlib}
 \subsection{Basic Plotting}
-\begin{minted}[frame=single]{python}
+\begin{minted}[frame=single,linenos,breaklines]{python}
    
 from numpy import *
 from pylab import *
@@ -1155,13 +1504,60 @@ plot(x, y, "r.")
 show()
 \end{minted}
 \subsection{Scatter Plot}
+\textbf{01}
+\begin{minted}[frame=single,linenos,breaklines]{python}
+  
+import matplotlib.pyplot as plt
+import numpy as np
+
+ax = plt.axes(projection="3d")
+
+x_data = np.arange(0, 10, 0.1)
+y_data = np.arange(0, 10, 0.1)
+z_data = x_data * y_data
+
+# ax.scatter(x_data, y_data, z_data, alpha=0.5, color="black")
+ax.plot(x_data, y_data, z_data)
+
+plt.show()
+\end{minted}
+\textbf{02}
+
+\begin{minted}[frame=single,linenos,breaklines]{python}
+import matplotlib.pyplot as plt
+import numpy as np
+
+ax = plt.axes(projection="3d")
+
+x_data = np.arange(0, 100, 10)
+y_data = np.arange(0, 100, 10)
+z_data = np.arange(0, 100, 10)
+
+ax.scatter(x_data, y_data, z_data, color="red", marker="v", alpha=0.9)
+
+plt.show()
+\end{minted}
 \subsection{Histogram}
+\begin{minted}[frame=single,linenos,breaklines]{python}
+import matplotlib.pyplot as plt
+# fig = plt.figure()
+# ax = fig.add_axes([0, 0, 1, 1])
+categories = ["A", "B", "C", "D"]
+values = [10, 23, 17, 5]
+ax = plt.bar(categories, values)
+plt.xlabel("marks", font="Maple Mono")
+plt.ylabel("marks", font="Maple Mono")
+plt.title("CSE 116 Marks", font="Maple Mono")
+plt.legend("CSE116", loc="lower left")
+# ax.bar(langs, students)
+plt.show()
+\end{minted}
 \subsection{Graphs}
 \subsubsection{Mathematical Equations}
 \begin{equation}
 	f(x) = \sin(x)
 \end{equation}
-\begin{minted}[frame=single]{python}
+\begin{minted}[frame=single,linenos,breaklines]{python}
    
 import matplotlib.pyplot as plt
 import numpy as np
@@ -1183,6 +1579,55 @@ plt.show()
 \end{minted}
 
 \subsection{3D Plotting}
-\subsection{Surface Plot}
 \textbf{Shpere}
+\begin{minted}[frame=single,linenos,breaklines]{python}
+from mpl_toolkits.mplot3d import Axes3D
+import numpy as np
+from matplotlib import pyplot as plt
+
+fig = plt.figure(figsize=(6, 6))
+ax = fig.add_subplot(111, projection="3d")
+
+# Create a sphere using numpy
+u = np.linspace(0, 2 * np.pi, 100)
+v = np.linspace(0, np.pi, 100)
+x = np.outer(np.cos(v), np.sin(u))
+y = np.outer(np.sin(v), np.sin(u))
+z = np.outer(np.ones(np.size(u)), np.cos(u))
+ax.plot_surface(x, y, z, color="r", rstride=4, cstride=4)
+
+plt.show()
+
+\end{minted}
+\subsection{Surface Plot}
+\begin{minted}[frame=single,linenos,breaklines]{python}
+   
+import matplotlib.pyplot as plt
+import numpy as np
+
+myplot = plt.axes(projection="3d")
+
+x_data = np.arange(0, 20, 0.1)
+y_data = np.arange(0, 20, 0.1)
+X, Y = np.meshgrid(x_data, y_data)
+Z = X * Y
+
+myplot.plot_surface(X, Y, Z)
+plt.show()
+
+\end{minted}
+\chapter{Practice}
+Start solving problems: \href{https://www.kaggle.com/datasets } {kaggle}\\
+Also watchout,
+\begin{itemize}
+	\item \href{https://www.cs.toronto.edu/~kriz/cifar.html}{CIFAR 10}
+	\item \href{https://www.kaggle.com/datasets/crawford/emnist }{EMNIST}
+\end{itemize}
+\chapter{Learn Generative AI}
+\begin{itemize}
+	\item \href{ https://www.coursera.org/specializations/deep-learning}{Deep Learning Full Course}
+	\item \href{ https://platform.openai.com/docs/guides/text-generation}{ChatGPT Documentation}
+	\item \href{ https://www.deeplearning.ai/short-courses/chatgpt-prompt-engineering-for-developers/}{ChatGPT Short Courses}
+	\item \href{ https://openai.com/index/introducing-the-gpt-store/}{GPT Store}
+\end{itemize}
 \end{document}

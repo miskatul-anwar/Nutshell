@@ -1,0 +1,14 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k+kn}{import} \PYG{n+nn}{matplotlib.pyplot} \PYG{k}{as} \PYG{n+nn}{plt}
+\PYG{c+c1}{\PYGZsh{} fig = plt.figure()}
+\PYG{c+c1}{\PYGZsh{} ax = fig.add\PYGZus{}axes([0, 0, 1, 1])}
+\PYG{n}{categories} \PYG{o}{=} \PYG{p}{[}\PYG{l+s+s2}{\PYGZdq{}A\PYGZdq{}}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}B\PYGZdq{}}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}C\PYGZdq{}}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}D\PYGZdq{}}\PYG{p}{]}
+\PYG{n}{values} \PYG{o}{=} \PYG{p}{[}\PYG{l+m+mi}{10}\PYG{p}{,} \PYG{l+m+mi}{23}\PYG{p}{,} \PYG{l+m+mi}{17}\PYG{p}{,} \PYG{l+m+mi}{5}\PYG{p}{]}
+\PYG{n}{ax} \PYG{o}{=} \PYG{n}{plt}\PYG{o}{.}\PYG{n}{bar}\PYG{p}{(}\PYG{n}{categories}\PYG{p}{,} \PYG{n}{values}\PYG{p}{)}
+\PYG{n}{plt}\PYG{o}{.}\PYG{n}{xlabel}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}marks\PYGZdq{}}\PYG{p}{,} \PYG{n}{font}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}Maple Mono\PYGZdq{}}\PYG{p}{)}
+\PYG{n}{plt}\PYG{o}{.}\PYG{n}{ylabel}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}marks\PYGZdq{}}\PYG{p}{,} \PYG{n}{font}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}Maple Mono\PYGZdq{}}\PYG{p}{)}
+\PYG{n}{plt}\PYG{o}{.}\PYG{n}{title}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}CSE 116 Marks\PYGZdq{}}\PYG{p}{,} \PYG{n}{font}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}Maple Mono\PYGZdq{}}\PYG{p}{)}
+\PYG{n}{plt}\PYG{o}{.}\PYG{n}{legend}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}CSE116\PYGZdq{}}\PYG{p}{,} \PYG{n}{loc}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}lower left\PYGZdq{}}\PYG{p}{)}
+\PYG{c+c1}{\PYGZsh{} ax.bar(langs, students)}
+\PYG{n}{plt}\PYG{o}{.}\PYG{n}{show}\PYG{p}{()}
+\end{Verbatim}

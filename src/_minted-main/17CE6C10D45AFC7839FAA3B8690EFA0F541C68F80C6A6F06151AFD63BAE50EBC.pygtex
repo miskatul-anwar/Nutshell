@@ -1,0 +1,16 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+
+\PYG{k+kn}{import} \PYG{n+nn}{matplotlib.pyplot} \PYG{k}{as} \PYG{n+nn}{plt}
+\PYG{k+kn}{import} \PYG{n+nn}{numpy} \PYG{k}{as} \PYG{n+nn}{np}
+
+\PYG{n}{myplot} \PYG{o}{=} \PYG{n}{plt}\PYG{o}{.}\PYG{n}{axes}\PYG{p}{(}\PYG{n}{projection}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}3d\PYGZdq{}}\PYG{p}{)}
+
+\PYG{n}{x\PYGZus{}data} \PYG{o}{=} \PYG{n}{np}\PYG{o}{.}\PYG{n}{arange}\PYG{p}{(}\PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{20}\PYG{p}{,} \PYG{l+m+mf}{0.1}\PYG{p}{)}
+\PYG{n}{y\PYGZus{}data} \PYG{o}{=} \PYG{n}{np}\PYG{o}{.}\PYG{n}{arange}\PYG{p}{(}\PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{20}\PYG{p}{,} \PYG{l+m+mf}{0.1}\PYG{p}{)}
+\PYG{n}{X}\PYG{p}{,} \PYG{n}{Y} \PYG{o}{=} \PYG{n}{np}\PYG{o}{.}\PYG{n}{meshgrid}\PYG{p}{(}\PYG{n}{x\PYGZus{}data}\PYG{p}{,} \PYG{n}{y\PYGZus{}data}\PYG{p}{)}
+\PYG{n}{Z} \PYG{o}{=} \PYG{n}{X} \PYG{o}{*} \PYG{n}{Y}
+
+\PYG{n}{myplot}\PYG{o}{.}\PYG{n}{plot\PYGZus{}surface}\PYG{p}{(}\PYG{n}{X}\PYG{p}{,} \PYG{n}{Y}\PYG{p}{,} \PYG{n}{Z}\PYG{p}{)}
+\PYG{n}{plt}\PYG{o}{.}\PYG{n}{show}\PYG{p}{()}
+
+\end{Verbatim}
